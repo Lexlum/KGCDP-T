@@ -1,0 +1,50 @@
+# general
+gpu_id: 0
+use_gpu: True
+seed: 19971003
+state: INFO
+dataset: webnlg
+num_samples: all  # 500
+reproducibility: True
+mode: train
+
+# checkpoint
+checkpoint: False
+
+# dataset
+data_dir: 'preprocess'
+node_vocab: 'preprocess/node.pkl'
+relation_vocab: 'preprocess/relation.pkl'
+node_embedding: 'preprocess/node_embeddings.npy'
+relation_embedding: 'preprocess/relation_embeddings.npy'
+
+# model
+teacher_dir: './pretrained_model/bart-base'
+plm_dir: './pretrained_model/bart-base'
+log_dir: './logging'
+
+# training settings
+start_epoch: 0
+epochs: 200
+train_batch_size: 20
+plm_learner: adamw
+plm_lr: 0.000001
+external_learner: adamw
+external_lr: 0.00001
+rec_weight: 1.0
+kd_weight: 1.0
+cp_weight: 1.0
+sprec_weight: 0.3
+gnn_layers: 2
+embedding_size: 128
+hidden_size: 768
+
+# evaluation settings
+eval_batch_size: 20
+
+# testing settings
+external_model: './ckpt/webnlg-all-206/external.bin'
+fine_tuned_plm_dir: './ckpt/webnlg-all-206'
+test_batch_size: 20
+max_seq_length: 100
+output_dir: './ckpt/webnlg-all-206'
